@@ -30,6 +30,7 @@ import java.util.*;
 
 /**
  * @author wenshao [szujobs@hotmail.com]
+ * @author Acewuye
  */
 public final class JdbcUtils implements JdbcConstants {
     private static final Log LOG = LogFactory.getLog(JdbcUtils.class);
@@ -936,8 +937,12 @@ public final class JdbcUtils implements JdbcConstants {
             return OracleUtils.showTables(conn);
         }
 
-        if (dbType == DbType.postgresql || dbType == DbType.gaussdb) {
+        if (dbType == DbType.postgresql) {
             return PGUtils.showTables(conn);
+        }
+
+        if (dbType == DbType.gaussdb) {
+            return GaussDBUtils.showTables(conn);
         }
         throw new SQLException("show tables dbType not support for " + dbType);
     }
